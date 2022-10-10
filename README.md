@@ -7,6 +7,8 @@ Des notes se trouvent avant la documentation des commandes, utiles pour s'y retr
 Ce travail est fait avec tout le sérieux que je peux donner, bien qu'il avance fort lentement.
 N'hésitez pas à me contacter pour toute question ou toute aide !
 
+Utilisez le script `separate_commands.sh` pour créer une fiche de documentation par commande, dans un fichier portant le nom de celle-ci (attention aux caractères spéciaux !).
+
 Vous êtes autorisé à redistribuer/modifier ce recueil sous license GPL-3.0, autrement dit je demande un lien vers cette page-ci ainsi qu'une mention de chacun des contributeurs.
 \
 \
