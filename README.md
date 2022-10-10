@@ -1,4 +1,4 @@
-# Basic.Casio_Reference
+# Référence Basic-Casio
 Une réécriture de la documentation des commandes Basic Casio, ayant pour but d'être complet (bien plus que le manuel officiel).\
 \
 Dans un premier temps, seule une version française a été envisagée.
