@@ -1,0 +1,592 @@
+En cours:
+
+  mettre tout après les "----------" en gardant l'ordre
+
+Note pour moi:
+    CHECKER les //TODO
+    aligner les résultats dans multiline block code de Min( Max( etc ?
+    "Pour initialiser une liste à l'aide d'une fonction" assez clair que fonction = qqch renvoyant une image àpd paramètre ? (par défaut X)
+    "pour changer d'unité" pluriel ou pas ?
+    DEMANDER COMMENT JE DEVRAIS DIRE SI NOMBRE D'ARGUMENTS CUSTOM ! Plusieurs >>> ou quoi ?
+    Voir nbre max éléments dans Vct & Mat (et donc nbr max d'arguments de List→Mat)
+    Voir "pour trier plusieurs listes" dans manuel
+    pas oublier sin  log  etc
+    dans List Vct Mat, ajouter lien vers url optimisation (enlever parenthèse, crochet, etc)
+    checker les retours à la ligne (et non paragraphe) après [/list]
+    voir si les [list] de Fill( s'affichent correctement
+    Ça se dit opcode?
+
+Note préalable.
+	Les différentes fonctions se trouvent après $$$
+	Les liens (url) seront entre && : &&SolveN&& (y compris pour les fonctions déjà présentes sur le site). La syntaxe Basic Casio n'est pas "respectée" : l'espace et les parenthèses sont ignorés (bien que certains peuvent être laissés par inadvertance). Quelques liens vers des tutos (et autres) sont déjà en BBCode ([url=LINK][/url]).
+	Ne connaissant que peu de bonnes applications des différentes fonctions (comme Super DrawStat), les liens vers d'autres url du site Planète Casio se feront assez rares. Ce point-ci serait utile d'être retravaillé par quelqu'un s'y connaissant mieux que moi ^^ .
+	Il est (fort) possible que les fiches doivent être revues d'un point de vue "visuel". En effet, je ne suis pas le meilleur concernant la présentation (par exemple, la plupart des codes se trouvent uniquement entre ``. Je ne saurais dire si c'est suffisant).
+	La localisation des fonctions (qui est l'ordre de ce document - afin de donner une sorte de tri par thème) se trouve après @@@ (par exemple @@@ PRGM (SHIFT, VARS), JUMP (F3), Lbl (F1) ). List  et Mat  peuvent être trouvés avec SHIFT+1 ou 2, mais leur chemin complet a été donné (OPTN+F1+F1 pour List ).
+	Le code (syntaxe de la fonction) se trouve après >>> . Il est possible que certaines fonctions possèdent une deuxième ligne - et donc une 2e fois ">>>" - (une pour le type d'argument, et l'autre pour nommer ces arguments - et savoir ainsi à quoi il sert. Ce qui est le cas de Seq).
+	La fin de chaque fiche est définie par les caractères ||| , donc le texte se trouvant entre >>> et ||| correspond à la description de la fonction.
+	La première ligne de description est un résumé de la commande Basic Casio (pouvant contenir tout Markdown, même des liens vers d'autre commande Basic Casio par ex.).
+	Les commandes Basic Casio sont liées entre-elles : il peut être intéressant d'allez voir les fiches proposées après |||, étant des compléments. Ces différentes commandes sont séparées par "; ", et il serait très intéressant de les présenter aux lecteurs avec la première ligne de leur description (qui est un résumé).
+	Toutes les erreurs possibles ont été mises en gras. Les erreurs très évidentes n'ont pas été écrites, comme l'erreur math que renverrait Det  si une liste était donnée à la place d'une matrice, ou encore si l'on donne un argument négatif pour la taille d'une liste (il est spécifié dans la fiche "doit être un naturel non nul").
+	Du BBCode se trouvera dans ce document (seulement [list] [li] et [url]), le reste sera du Markdown (italique, code, code multiligne, gras, souligné, ...). Des caractères spéciaux s'y trouveront aussi (▷, →, ...). Certaines polices ne supportent pas très bien ces caractères, car présentent un décalage entre la fonte graphique et le curseur (peut-être un problème uniquement sur Android ?). J'utilise personnellement JetBrains Mono qui fonctionne comme voulu (sur Android).
+	Toutes les fonctions ne se trouvant pas encore sur le site mais bien dans ce document sont compatibles OS Graph 2.05 et supposées compatibles 2.00.
+	Les fonctions se trouvant déjà sur le site sont reprises après la ligne de tirets (-), leur compatibilité sur différentes calculatrices n'ayant pas été prise en compte.
+	Des erreurs de français pourraient se trouver dans ce document (bien que - je l'espère - limitées). Je m'en excuse d'avance.
+	La fonction Dim se trouve aussi bien dans OPTN+F1 que OPTN+F6+F2, seulement le premier cas a été pris en compte. D'autres fonctions sont aussi dans ce cas (comme Fill).
+	Seulement les cas où la parenthèse fermante de la fonction est obligatoire sont spécifiés (autrement, cela veut dire qu'on peut l'oublier), contrairement aux arguments, pour lesquels seuls ceux pouvant être ommis sont cités.
+	Certaines fiches n'ont pas été écrites : c'est le cas de f1 (→f6 - voir fn), List1 (→List6 - voir List), VarList1 (→VarList6 - voir VarList) et File1 (→File6 - voir File). Ces dernières ne se trouvent que dans le catalogue de la calto (SHIFT+4), et peuvent être retrouvée avec la fiche générale (en effet ces cas particuliers servent uniquement à gagner l'un ou l'autre octet).
+	Les différentes fonctions supportent aussi bien les nombres réels qu'imaginaires, sauf contre-indication.
+
+
+
+$$$ Identity
+@@@ OPTN (OPTN), MAT (F2), ▷ (F6), Iden (F1)
+>>> Indentity <N>
+Crée une nouvelle matrice identité de taille <N>×<N>.
+Elle contient donc des `1` uniquement sur la diagonale principale, et des 0 partout ailleurs.
+
+<N> peut être un nombre, une variable, ou toute expression renvoyant un naturel non nul.
+||| Mat; Vct; Trn; Det; Rref; Norm;
+
+
+$$$ Ref
+@@@ OPTN (OPTN), MAT (F2), ▷ (F6), Ref (F4)
+>>> Ref <Matrix>
+Renvoie la matrice sous forme échelonnée __non__ réduite par rapport aux lignes - Row Echelon Form.
+Elle est donc par conséquent triangulaire supérieure.
+
+Par exemple `Ref [[1,2][4,4]]` donnera `[[1,1][0,1]]`.
+
+<Matrix> peut être de différentes formes :
+[list=arrow]
+  [li]`[[1,2][3,4]]`[/li]
+  [li]`Mat A`[/li]
+  [li]`(2×Mat A)` , ou toute autre expression renvoyant une matrice, comme &&Identity&&.[/li]
+[/list]
+||| Mat; Vct; Trn; Det; Rref; Norm;
+
+
+$$$ Rref
+@@@ OPTN (OPTN), MAT (F2), ▷ (F6), Rref (F5)
+>>> Rref <Matrix>
+Renvoie la matrice sous forme échelonnée réduite par rapport aux lignes - Row Reduced Echelon Form.
+Elle est donc par conséquent triangulaire supérieure.
+
+Cette fonction permet de résoudre des systèmes d'équation (dont les inconnues sont toutes d'ordre 0 ou 1).
+Par exemple, pour résoudre le système X+Y=0 et X-Y=6, nous avons une matrice de coeficients `[[1,1,0][1,-1,6]]` (chaque ligne correspondant à une équation). Après avoir avoir utilisé `Rref`, nous obtenons la matrice `[[1,0,3][0,1,-3]]`.
+On peut voir cette dernière comme la représentation du système 1X+0Y=3 et 0X+1Y=-3. Autrement dit, X=3 et Y=-3.
+
+<Matrix> peut être de différentes formes :
+[list=arrow]
+  [li]`[[1,2][3,4]]`[/li]
+  [li]`Mat A`[/li]
+  [li]`(2×Mat A)` , ou toute autre expression renvoyant une matrice, comme &&Identity&&.[/li]
+[/list]
+||| Mat; Vct; Trn; Det; Ref; Norm;
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+$$$ List
+@@@ OPTN (OPTN), LIST (F1), List (F1)
+>>> List <String|N>
+Les listes sont tableaux unidimensionnels, accessibles par un nombre ente 1 et 26, pouvant contenir un nom, et entre 1 et 999 éléments sur les calculatrices "récentes".
+Les différentes listes se trouvent dans l'application STAT : (MENU) + (2).
+On peut aussi obtenir la commande `List` en appuyant sur (SHIFT) + (1).
+
+L'argument <String|N> d'une liste peut être de différentes formes :
+[list=arrow]
+  [li]une chaîne de caractères, étant le nom de la liste (seuls les *8 premiers octets* de la String seront pris en compte - une chaîne vide est valide). 2 listes ne peuvent pas avoir le même nom, ou une erreur est renvoyée : "**Existe déjà**".[/li]
+  [li]un nombre n, étant le numéro de la liste (qui peut aussi être une variable dont la valeur est le numéro de la liste, ou `Ans` qui est utilisé pour `List Ans` : une liste que l'on n'a pas stockée; la valeur de Ans ne sera jamais lue).[/li]
+[/list]
+Selon votre modèle de calculatrice, il y a maximum 6, 20 ou 26 listes, et un maximum de 255 ou 999 éléments. Les commandes `List1` (jusque `List6`) sont trouvables dans le catalogue de la calculatrice - (SHIFT) + (4), permettant ainsi d'alléger le code (en effet, ces commandes pèsent 1 octet chacune).
+On dispose aussi de 6 "Fichiers" de liste (voir &&File&&); on a donc au maximum 26×6=156 listes stockées.
+
+N'hésitez pas à aller voir le [url=https://www.planet-casio.com/Fr/programmation/listes.php]fonctionnement des listes dans le tutoriel de programmation Basic Casio[/url].
+
+Toute opération mathématique est supportée par les listes : on peut dès lors utiliser les fonctions &&log&& ou &&cos&& sur une liste, la multiplier, l'additioner ou l'élever à une puissance avec un scalaire, ou même avec une autre liste !
+Un calcul entre plusieurs listes se fait élément par élément, il faut donc que celles-ci soient de même taille (ou une **Erreur dimension** sera renvoyée).
+Par exemple, `{1,2,3}^{2,3,4}` donne `{1,8,81}`. Il faut donc s'en rappeler pour déterminer *si 2 listes sont identiques*. Une telle condition peut être implémentée comme suit (voir &&Not&& et &&Sum&&):
+```
+Not Sum (List 1≠List 2
+```
+
+Un liste peut être initialisée de différentes façons :
+[list=arrow]
+  [li]`{1,2,3}→List 1`[/li]
+  [li]`2×Seq(X,X,1,3,1)→List 1` , ou toute autre expression/fonction renvoyant une liste (voir &&Seq&&).[/li]
+  [li]`3→Dim List 1` où 3 (ou toute autre expression/fonction renvoyant un naturel non nul) devient la dimension (voir &&Dim&&) de la liste 1. La liste contient donc maintenant uniquement 3 éléments, initialisés à 0.[/li]
+[/list]
+Il est important à noter que l'initialisation d'une liste *ne peut faire appel à des éléments d'une autre liste, d'une matrice ou encore d'un vecteur directement* (voir &&Mat&& et &&Vct&&). L'exemple suivant renvoie donc une **Erreur syntaxe** : `{List 1[1], Mat A[1,3]}→List 1`. Des résultats intermédiaires sont nécessaires.
+
+On ne peut pas initialiser la `List Ans` de la même manière (`{1,2,3}→List Ans` produit une **Erreur argument**).
+En effet, toute expression/fonction renvoyant une liste qui n'est pas stockée se retrouve dans `List Ans`.
+
+On peut aussi initialiser une liste grâce à un nom unique (de 8 octets maximum - une chaîne de caractères vide est valide) : `3→Dim List "BLABLA"`. Si la liste "BLABLA" existe déjà, elle sera écrasée. Au contraire, si elle n'existe pas encore, une liste vide jusqu'ici sera utilisée (il n'est pas aisé de savoir à quel numéro de liste elle correspond...).  Ceci renvoie une **Erreur mémoire** si toutes les listes sont déjà initialisées.
+Ce nom est stocké à l'indice `[0]`, et peut être changé : `"ALBALB"→List 1[0]` (l'indice `[0]` peut, dans ce cas-ci, être ommis). Si la liste était vide, elle contient maintenant la valeur `0` à l'indice `[1]`.
+Ce nom peut être affiché grâce à &&Locate&&, et peut être récupéré dans une String : `List 1[0]→Str 1` (voir &&Str&&).
+
+Pour modifier un élément ou le lire, il faut spécifier l'indice de celui-ci entre crochet après la liste (par exemple `2→List 1[5]`). On ne peut accéder un élément que dans une `List` - et non si la liste est une expression/fonction (`Seq(X,X,1,3,1)[2]` renvoie une **Erreur syntaxe** - voir &&Seq&&). Aussi, un élément en particulier ne peut être modifié s'il se trouve dans `List Ans`.
+Les listes supportent l'auto-incrémentation (d'un seul élément à la fois), c'est-à-dire que si vous écrivez une valeur à d'indice `1+Dim List 1` , celle-ci sera ajoutée à votre liste, comportant maintenant un élément de plus.
+||| ClrList; File; SortA; SortD; Augment; Max; Min; Mean; Median; Sum; Prod; Percent; Cuml; ◿List; Mat→List; List→Mat;
+
+
+$$$ List→Mat
+@@@ OPTN (OPTN), LIST (F1), L→M (F2)
+>>> List→Mat(<List|N>, [<List|N>], ... )
+Convertit une suite de listes tel que chaque liste devient une colonne de la nouvelle matrice.
+Le nombre maximum d'arguments de cette fonction est le même nombre que le maximum de colonnes contenues dans une matrice.
+
+Le résultat peut directement être stocké dans une matrice (`List→Mat(1)→Mat A`).
+
+<List|N> peut-être de différentes formes (dans n'importe quel cas, doit impérativement être un résultat direct, et donc ne pas être une expression/fonction):
+[list=arrow]
+  [li]`{1,2,3}`[/li]
+  [li]`List 1`[/li]
+  [li]`1` , qui est le numéro de la liste (ou `Ans` , qui représente bien `List Ans`). Cela peut aussi être une variable (autre que `Ans`) dont la valeur sera lue, mais pas un nombre stocké dans une liste ou matrice.[/li]
+[/list]
+||| List; Mat; Vct; Mat→List; Augment;
+
+
+$$$ Dim
+@@@ OPTN (OPTN), LIST (F1), Dim (F3)
+>>> Dim <List|Matrix|Vector>
+Retourne la taille d'une liste, d'un vecteur ou d'une matrice. Aussi utilisé pour initialiser une liste, un vecteur ou une matrice.
+
+La valeur de retour est :
+[list]
+  [li]un scalaire (= nombre d'éléments) pour les listes;[/li]
+  [li]une liste (= nombre de lignes × nombre de colonnes) pour les matrices et vecteurs.[/li]
+[/list]
+
+Peut aussi être utilisé pour initialiser une liste, un vecteur, ou encore une matrice avec des éléments tous égaux à 0.
+Par exemple, `3→Dim List 1` initialise la liste 1 à une taille de 3 (et tous ses éléments valent 0). Pour plus d'informations, voir &&List&&, &&Mat&& et enfin &&Vct&&.
+||| List; Mat; Vct; Fill; Augment; Seq;
+
+
+$$$ Fill
+@@@ OPTN (OPTN), LIST (F1), Fill (F4)
+>>> Fill(<N>,<List|N|Matrix>)
+Remplit une liste, un vecteur ou une matrice __pré-initialisé__ avec la valeur <N>.
+La commande `Fill` peut aussi être trouvée ici : `OPTN + F2 (MAT), F6 (▷), F3 (Fill)`.
+
+Une **Erreur syntaxe** est renvoyée si <List|N|Matrix> n'est pas un résultat direct (ou n'est pas un numéro de liste existant), autrement dit si <List|N|Matrix> est une expression contenant une fonction, ou toute autre calcul (comme `2+A`).
+Une **Erreur dimension** est renvoyée si <List|N|Matrix> n'est pas encore initialisée.
+
+<N> peut-être un nombre, une variable, ou toute expression/fonction renvoyant un scalaire.
+
+<List|N|Matrix> peut-être de différentes formes :
+[list=arrow]
+  [li]Si c'est une liste :[/li]
+  [list]
+	[li]`List 1`[/li]
+	[li]`1` , qui est le numéro de la liste (ou `Ans` , qui représente bien `List Ans`). Cela peut aussi être une variable (autre que `Ans`) dont la valeur sera lue, mais pas un nombre stocké dans une liste ou matrice. Doit impérativement être un résultat direct (pas d'expression/fonction).[/li]
+  [/list]
+  [li]Si c'est une matrice :[/li]
+  [list]
+	[li]`Mat A`[/li]
+  [/list]
+[/list]
+||| List; Mat; Max; Min; Mean; Dim; Augment; Seq;
+
+
+$$$ Seq
+@@@ OPTN (OPTN), LIST (F1), Seq (F5)
+>>> Seq(<Expr>, <Var>, <N>, <N>, <N>)
+>>> Seq(Expression, Variable_utilisée, Borne_inf, Borne_sup, Pas)
+Crée une liste à partir d'une expression, évaluée en plusieurs points entre 2 bornes suivant la valeur du pas.
+Tous les arguments sont obligatoires, ou une **Erreur syntaxe** apparaîtra.
+Seule la variable de l'expression sera modifiée, les autres étant conservées.
+
+Le résultat peut directement être stocké dans une Liste (comme `Seq(X²,X,1,2,1)→List 1`).
+
+L'image d'un point est calculée si la condition suivante est vraie : `<Var> + Pas <= Borne_sup`, <Var> étant en tout premier lieu initialisée à `Borne_inf`, et incrémentée à chaque calcul d'image.
+Dès lors, une **Erreur math** est renvoyée si la borne supérieure est strictement plus petite que la borne inférieure.
+
+<N> peut-être un nombre, une variable, ou toute expression renvoyant un scalaire __réel__.
+||| List; Max; Min; Mean; Dim; Augment;
+
+
+$$$ Min
+@@@ OPTN (OPTN), LIST (F1), ▷ (F6), Min (F1)
+>>> Min(<List>,<List>)
+Retourne l'élement de plus petit module (un scalaire si un seul argument, une liste si 2 arguments). Voir cas "spéciaux".
+
+Si seulement une liste est donnée en argument, renvoie l'élément :
+[list]
+  [li]ayant le plus petit module lorsqu'au moins un élément de la liste est complexe;[/li]
+  [li]le plus petit si on travaille uniquement avec les réels.[/li]
+[/list]
+Si 2 listes sont données en argument (de même taille), renvoie une nouvelle liste où les éléments sont comparés 2 à 2 telle que :
+[list]
+  [li]si les 2 listes contiennent uniquement des réels, l'élément le plus petit est retenu;[/li]
+  [li]s'il y a au moins un élément complexe dans __chacune__ des 2 listes, l'élément ayant le plus petit module sera retenu;[/li]
+  [li]sinon (donc une liste est entièrement réelle et l'autre contient au moins un élément complexe), l'élément retenu est le plus petit (entre 2 réels), ou le plus petit entre : le réel et le module du complexe. Voir la dernière ligne de code ci-dessous.[/li]
+[/list]
+
+Pour clarifier les choses, voici quelques exemples :
+```
+Min({-9,5}) //renvoie -9
+Min({-9,1+i}) //renvoie 1+i
+Min({-i,1}) //renvoie -i
+Min({-9,5},{3,-1}) //renvoie {-9,-1}
+Min({1,4-3i},{-2,6i}) //renvoie {1,4-3i}. Attention, 1 est retenu car possède un module < -2
+Min({1,4-3i},{-2,6} //renvoie {-2,4-3i}. Attention, une liste étant entièrement réelle, -2 < 1
+```
+
+Il est parfois utile de se souvenir que lorsque des éléments de mêmes modules sont rencontrés, seul le premier sera retenu (voir la 3e ligne de code ci-dessus).
+
+<List> peut être de différentes formes (dans tous les cas, doit être un résultat direct, donc pas d'expression - ni d'appel à d'autre fonction - tel que `2×List 1`) :
+[list=arrow]
+  [li]`{1,2,3}`[/li]
+  [li]`List 1`[/li]
+[/list]
+||| List; Max; Mean; Median; Sum; Prod;
+
+
+$$$ Max
+@@@ OPTN (OPTN), LIST (F1), ▷ (F6), Max (F2)
+>>> Max(<List>,<List>)
+Retourne l'élement de plus grand module (un scalaire si un seul argument, une liste si 2 arguments). Voir cas "spéciaux".
+
+Si seulement une liste est donnée en argument, renvoie l'élément :
+[list]
+  [li]ayant le plus grand module lorsqu'au moins un élément de la liste est complexe;[/li]
+  [li]le plus grand si on travaille uniquement avec les réels.[/li]
+[/list]
+Si 2 listes sont données en argument (de même taille), renvoie une nouvelle liste où les éléments sont comparés 2 à 2 telle que :
+[list]
+  [li]si les 2 listes contiennent uniquement des réels, l'élément le plus grand est retenu;[/li]
+  [li]s'il y a au moins un élément complexe dans __chacune__ des 2 listes, l'élément ayant le plus grand module sera retenu;[/li]
+  [li]sinon (donc une liste est entièrement réelle et l'autre contient au moins un élément complexe), l'élément retenu est le plus grand (entre 2 réels), ou le plus grand entre : le réel et le module du complexe. Voir la dernière ligne de code ci-dessous.[/li]
+[/list]
+
+Pour clarifier les choses, voici quelques exemples :
+```
+Max({-9,5}) //renvoie 5
+Max({-9,1+i}) //renvoie -9
+Max({-i,i}) //renvoie -i
+Max({-9,5},{3,-1}) //renvoie {3,5}
+Max({1,4-3i},{-2,6i}) //renvoie {-2,6i}. Attention, -2 est retenu car possède un module > 1
+Max({1,4-3i},{-2,6} //renvoie {1,6}. Attention, une liste étant entièrement réelle, 1 > -2
+```
+
+Il est parfois utile de se souvenir que lorsque des éléments de mêmes modules sont rencontrés, seul le premier sera retenu (voir la 3e ligne de code ci-dessus).
+
+<List> peut être de différentes formes (dans tous les cas, doit être un résultat direct, donc pas d'expression - ni d'appel à d'autre fonction - tel que `2×List 1`) :
+[list=arrow]
+  [li]`{1,2,3}`[/li]
+  [li]`List 1`[/li]
+[/list]
+||| List; Min; Mean; Median; Sum; Prod;
+
+
+$$$ Mean
+@@@ OPTN (OPTN), LIST (F1), ▷ (F6), Mean (F3)
+>>> Mean(<List>,<List>)
+Renvoie la moyenne arithmétique de la première liste pondérée par les poids de la deuxième. Si cette dernière ne contient que des éléments égaux à 1, elle peut être ommise.
+Bien évidemment, les 2 listes doivent avoir la même dimension ou une **Erreur math** sera renvoyée.
+Aussi, si la somme des éléments de la deuxième liste vaut, une **Erreur math** est renvoyée. //TODO vaut quoi ?
+
+Si une liste comprenant au moins un élément complexe est donnée, une erreur **Nombre complexe dans la liste** sera renvoyée.
+
+<List> peut être de différentes formes (dans tous les cas, doit être un résultat direct, donc pas d'expression - ni d'appel à d'autre fonction - tel que `2×List 1`) :
+[list=arrow]
+  [li]`{1,2,3}`[/li]
+  [li]`List 1`[/li]
+[/list]
+||| List; Max; Min; Median; Sum; Prod;
+
+
+$$$ Median
+@@@ OPTN (OPTN), LIST (F1), ▷ (F6), Med (F4)
+>>> Median(<List>,<List>)
+Renvoie la médiane (statistique) d'une liste. //TODO que retourne Median si 2 arguments ?
+Autrement dit : pour un nombre N d'éléments dans la liste 1, `Median(List 1)` trie la liste "temporairement", puis renvoie :
+[list]
+  [li]si N est impair : l'élément au milieu de la liste triée, `List 1[(1+N)/2]`.[/li]
+  [li]si N est pair : la moyenne arithmétique des 2 éléments se trouvant au milieu de la liste triée.[/li]
+[/list]
+||| List; Max; Min; Mean; Sum; Prod;
+
+
+$$$ Augment
+@@@ OPTN (OPTN), LIST (F1), ▷ (F6), Aug (F5)
+>>> Augment(<List|Matrix|Vector>,<List|Matrix|Vector>) //TODO parler des matrices & vecteur
+Crée une nouvelle liste, dont les éléments sont ceux de la première liste donnée en argument, *puis* ceux de la deuxième (l'ordre est maintenu).
+La commande `Augment` peut aussi être trouvée ici : `OPTN, MAT (F2), Aug (F5)`
+
+<List> peut être de différentes formes :
+[list=arrow]
+  [li]`{1,2,3}`[/li]
+  [li]`List 1`[/li]
+  [li]`Seq(X,X,1,3,1)` (voir &&Seq&&), ou toute autre expression renvoyant une liste.[/li]
+[/list]
+||| List; Max; Min; Mean; Sum; Prod; Fill; Seq;
+
+
+$$$ Sum
+@@@ OPTN (OPTN), LIST (F1), ▷ (F6), ▷ (F6), Sum (F1)
+>>> Sum <List>
+Renvoie la somme de tous les éléments d'une liste.
+
+<List> peut être de différentes formes :
+[list=arrow]
+  [li]`{1,2,3}`[/li]
+  [li]`List 1`[/li]
+  [li]`Seq(X,X,1,3,1)` (voir &&Seq&&), ou toute autre expression/fonction renvoyant une liste.[/li]
+[/list]
+||| List; Max; Min; Mean; Prod; Percent; Cuml; ◿List;
+
+
+$$$ Prod
+@@@ OPTN (OPTN), LIST (F1), ▷ (F6), ▷ (F6), Prod (F2)
+>>> Prod <List>
+Renvoie le produit de tous les éléments d'une liste.
+
+<List> peut être de différentes formes :
+[list=arrow]
+  [li]`{1,2,3}`[/li]
+  [li]`List 1`[/li]
+  [li]`Seq(X,X,1,3,1)` (voir &&Seq&&), ou toute autre expression/fonction renvoyant une liste.[/li]
+[/list]
+||| List; Max; Min; Mean; Sum; Percent; Cuml; ◿List;
+
+
+$$$ Cuml
+@@@ OPTN (OPTN), LIST (F1), ▷ (F6), ▷ (F6), Cuml (F3)
+>>> Cuml <List>
+Renvoie une nouvelle liste composée des sommes cumulées des éléments de la liste donnée.
+Autrement dit, chaque élément de la nouvelle liste correspond à la somme des éléments (de la liste donnée) avant sa position - et celle-ci y comprise.
+
+Par exemple, `Cuml {1,2,3}` donnera `{1,3,6}`.
+||| List; Max; Min; Mean; Sum; Prod; Percent; ◿List;
+
+
+$$$ Percent
+@@@ OPTN (OPTN), LIST (F1), ▷ (F6), ▷ (F6), % (F4)
+>>> Percent <List>
+Renvoie une nouvelle liste contenant le pourcentage de chaque élément par rapport à la somme de la liste.
+
+La fonction est donc équivalente à `100×<List>÷Sum <List>` (voir &&Sum&&).
+
+Une **Erreur math** est renvoyée si au moins un élément est négatif ou si tous les éléments sont nuls.
+
+<List> peut être de différentes formes :
+[list=arrow]
+  [li]`{1,2,3}`[/li]
+  [li]`List 1`[/li]
+  [li]`Seq(X,X,1,3,1)` (voir &&Seq&&), ou toute autre expression renvoyant une liste.[/li]
+[/list]
+||| List; Max; Min; Mean; Sum; Prod; Cuml; ◿List;
+
+
+$$$ ◿List
+@@@ OPTN (OPTN), LIST (F1), ▷ (F6), ▷ (F6), ◿ (F5)
+>>> ◿List <List|N>
+Crée une nouvelle liste (contenant un élément en moins) de différences des éléments successifs de la liste donnée.
+La différence est définie par : `(élément de suivant) - (élément de précédent)`.
+
+Exemple : le code `◿List {1,3,4}` renvoie la liste `{2,1}`.
+
+Une **Erreur syntaxe** est renvoyée si <List> n'est pas un résultat direct, autrement dit si <List> est une expression contenant une fonction (comme &&Seq&&), ou si <List> contient, par exemple, `(2×{1,3,4})`.
+Une **Erreur dimension** est renvoyée si <List> ne contient qu'un seul élément.
+
+<List|N> peut être de différentes formes :
+[list=arrow]
+  [li]`{1,2,3}`[/li]
+  [li]`1`, qui correspond au numéro de la liste (ou encore `Ans`). Cela peut aussi être une variable (autre que `Ans`, mais pas un nombre stocké dans une liste ou matrice - voir &&Mat&&).[/li]
+[/list]
+Vous l'aurez remarqué, __on ne peut pas spécifier l'opcode `List`__.
+||| List; Max; Min; Mean; Prod; Percent; Cuml;
+
+
+$$$ Mat
+@@@ OPTN (OPTN), MAT (F2), Mat (F1)
+>>> Mat <Var>
+Les matrices sont tableaux 2D, accessibles par une lettre alphabétique (A~Z).
+La liste des matrices se trouve dans l'application RUN-MAT, ▶MAT (F3).
+Pour des cas des cas particuliers de matrices unidimensionnelles, les vecteurs peuvent *aussi* être utilisés (voir &&Vct&&).
+
+<Var> peut être une lettre de l'alphabet (A~Z), ou bien `Ans`.
+
+L'addition entre un scalaire et une matrice n'est pas tolérée, mais bien la multiplication entre ceux-ci.
+Pour mutliplier 2 matrices, il faut que leur dimensions soient (dans l'ordre) `m×n` et `n×p` - et le résultat sera une matrice de taille `m×p`. On ne peut donc élever une matrice à une puissance que si celle-ci est carrée.
+Aucune autre fonction mathématique ne peut être appliquée à une matrice, comme &&sin&&, &&ln&& ou encore même l'égalité. Par conséquent, une condition pour tester *si 2 matrices (ou vecteurs) sont identiques* est donnée par :
+```
+Not Norm(Vct 1-Vct 2
+```
+Voir &&Norm&& et &&Not&&. Il faut donc que les 2 matrices soient de mêmes dimensions, ou une **Erreur dimension__ sera renvoyée.
+
+Une matrice peut être initialisée de différentes façons :
+[list=arrow]
+  [li]`[[1,2,3]]→Mat A` qui est une matrice ligne.[/li]
+  [li]`[[1,1][2,2][3,3]]→Mat A` qui est un matrice de 3 lignes et 2 colonnes.[/li]
+  [li]`2×Vct A→Mat A`, ou toute autre expression/fonction renvoyant une matrice.[/li]
+  [li]`{2,3}→Dim Mat A` qui est une matrice de 2 lignes et 3 colonnes dont tous les éléments sont initialisés à 0 (voir &&List&& et &&Dim&&).[/li]
+[/list]
+Il est important à noter que l'initialisation d'une matrice (et donc d'un vecteur) *ne peut pas faire appel à un élément d'une liste, d'une autre matrice ou encore d'un vecteur directement*. L'exemple suivant renvoie donc une **Erreur syntaxe** : `[[List 1[1], Mat A[1,3]]]→Mat A`. Des résultats intermédiaires sont nécessaires.
+
+On ne peut pas initialiser le `Mat Ans` de cette manière (`[[1,2,3]]→Mat Ans` produit une **Erreur syntaxe**).
+En effet, toute expression/fonction renvoyant une matrice qui n'est pas stockée se retrouve dans `Mat Ans`.
+
+Pour modifier un élément ou le lire, il faut spécifier l'indice (commençant à `[1,1]`) de celui-ci entre crochet après la matrice. Par exemple `2→Mat A[3,1]` où 3 est le numéro de la ligne, et 1 celui de la colonne. Une **Erreur dimension** est renvoyée s'il n'existe pas d'élément à l'indice spécifié.
+On ne peut accéder un élément que dans une `Mat` - et non si la matrice est une expression/fonction (`(Mat A×Mat B)[2,1]` renvoie une **Erreur syntaxe**). Aussi, un élément en particulier ne peut pas être modifié s'il se trouve dans `Mat Ans`.
+Les matrices (comme les vecteurs) ne supportent pas l'auto-incrémentation, et le seul moyen restant d'augmenter les dimensions d'une matrice (tout en gardant ses données) est d'utiliser la fonction &&Augment&&.
+||| Vct; List; ClrMat; Trn; Det; Augment; Fill;
+
+
+$$$ Mat→List
+@@@ OPTN (OPTN), MAT (F2), M→L (F2)
+>>> Mat→List(<Matrix|Vector>, <N>)
+Construit une nouvelle liste à partir de la <N>ième colonne d'une matrice. //TODO développer plus ?
+||| List; Mat; Vct; List→Mat; Augment;
+
+
+$$$ Det
+@@@ OPTN (OPTN), MAT (F2), Det (F3)
+>>> Det <Matrix>
+Renvoie le déterminant d'une matrice carrée.
+
+Une **Erreur dimension** est renvoyée si <Matrix> n'est pas carrée.
+
+<Matrix> peut être de différentes formes :
+[list=arrow]
+  [li]`[[1,2][3,4]]`[/li]
+  [li]`Mat A` (voir &&Mat&&)[/li]
+  [li]`(2×Mat A)`, ou toute autre expression renvoyant une matrice, comme &&Identity&&.[/li]
+[/list]
+||| Mat; Vct; Trn; Det; Rref; Norm;
+
+
+$$$ Trn
+@@@ OPTN (OPTN), MAT (F2), Trn (F4)
+>>> Trn <Matrix|Vector>
+Renvoie la transposée de la matrice (ou du vecteur) donné-e. //TODO développer plus ? + ajouter liens
+|||
+
+
+$$$ Vct
+@@@ OPTN (OPTN), MAT (F2), ▷ (F6), ▷ (F6), Vct (F1)
+>>> Vct <Var>
+Les vecteurs sont tableaux unidimensionnels, accessibles par une lettre alphabétique (A~Z).
+La liste des vecteurs se trouve dans l'application RUN-MAT, ▶MAT (F3), M↔V (F6).
+Les vecteurs sont des matrices unidimensionnelles (voir &&Mat&&).
+
+<Var> peut être une lettre de l'alphabet (A~Z), ou bien `Ans`.
+
+L'addition entre un scalaire et un vecteur n'est pas tolérée, mais bien la multiplication entre ceux-ci.
+Pour mutliplier des vecteurs de même nombre d'éléments entre-eux directement, il faut impérativement que l'un soit un vecteur colonne et l'autre matrice (et le résultat sera une matrice 1×1).
+On peut éviter ce souci avec la fonction &&DotP&&, qui renvoie un scalaire peu importe l'orientation des vecteurs (colonne ou ligne).
+Il n'est de nouveau pas possible d'élever un vecteur à une puissance (à part le cas particulier d'un vecteur d'un seul élément), car il faut pour ça avoir une matrice carrée.
+Aucune autre fonction mathématique ne peut être appliquée à un vecteur, comme &&sin&&, &&ln&& ou encore même l'égalité. Par conséquent, une condition pour tester *si 2 vecteurs (ou matrices) sont identiques* est donnée par :
+```
+Not Norm(Vct 1-Vct 2
+```
+Voir &&Norm&& et &&Not&&. Il faut donc que les 2 vecteurs soient de mêmes dimensions, ou une **Erreur dimension__ sera renvoyée.
+
+Un vecteur peut être initialisé de différentes façons :
+[list=arrow]
+  [li]`[[1,2,3]]→Vct A` qui est un vecteur ligne.[/li]
+  [li]`[[1][2][3]]→Vct A` qui est un vecteur colonne.[/li]
+  [li]`Mat A→Vct A` , ou toute autre expression/fonction renvoyant une matrice ligne ou une matrice colonne (voir &&Mat&&).[/li]
+  [li]`{1,3}→Dim Vct A` qui est un vecteur ligne dont tous les éléments sont initialisés à 0 (voir &&List&& et &&Dim&&).[/li]
+[/list]
+Il est important à noter que l'initialisation d'un vecteur (et d'une matrice de manière plus générale) *ne peut pas utiliser un élément d'une liste, d'un autre vecteur, ou encore d'une matrice directement*. L'exemple suivant renvoie donc une **Erreur syntaxe** : `[[List 1[1], Mat A[1,3]]]→Vct A`. Des résultats intermédiaires sont nécessaires.
+
+On ne peut pas initialiser le `Vct Ans` de cette manière (`[[1,2,3]]→Vct Ans` produit une **Erreur syntaxe**).
+En effet, toute expression/fonction renvoyant un vecteur (ou une matrice unidimensionnelle) qui n'est pas stocké se retrouve dans `Vct Ans` (et par la même occasion dans `Mat Ans`).
+
+Pour modifier un élément ou le lire, il faut spécifier l'indice de celui-ci (commençant à `[1,1]`) entre crochet après le vecteur. Les vecteurs sont aussi considérés comme des matrices, il faut par conséquent préciser 2 coordonnées pour accéder à un de ses élément. Par exemple `2→Vct A[3,1]` où 3 est le numéro de la ligne, et 1 celui de la colonne (`Vct A` est donc un vecteur colonne). Il est donc important de savoir si vous avez affaire avec un vecteur colonne ou ligne, ou une **Erreur dimension** sera renvoyée.
+On ne peut accéder un élément que dans un `Vct` - et non si le vecteur est une expression/fonction (`(DotP(Vct A,Vct B)[2,1]` renvoie une **Erreur syntaxe**). Aussi, un élément en particulier ne peut pas être modifié s'il se trouve dans `Vct Ans`.
+Les vecteurs (comme les matrices) ne supportent pas l'auto-incrémentation, et le seul moyen restant d'augmenter les dimensions d'un vecteur (tout en gardant ses données) est d'utiliser la fonction &&Augment&&.
+||| Mat; List; ClrVct; Trn; DotP; CrossP; Angle; UnitV; Norm;
+
+
+$$$ DotP
+@@@ OPTN (OPTN), MAT (F2), ▷ (F6), ▷ (F6), DotP (F2)
+>>> DotP(<Matrix|Vector>,<Matrix|Vector>)
+Effectue le produit scalaire des 2 vecteurs (ou matrices unidimensionnelles).
+On peut aussi multiplier directement 2 vecteurs (sans appel à `DotP`), mais il faut donc que l'un soit colonne et l'autre ligne.
+
+Une **Erreur dimension** est renvoyée si les arguments n'ont pas le même nombre d'éléments (ou si un des 2 n'est pas unidimensionnel).
+
+<Matrix|Vector> peut être de différentes formes :
+[list=arrow]
+  [li]`[[1,2,3]]`[/li]
+  [li]`Vct A`[/li]
+  [li]`Mat A`, à condition que ce soit une matrice unidimensionnelle.[/li]
+  [li]`2×Vct A`, ou toute autre expression/fonction renvoyant une matrice unidimensionnelle (= vecteur).[/li]
+[/list]
+||| Mat; Vct; CrossP; Angle; Norm; UnitV;
+
+
+$$$ CrossP
+@@@ OPTN (OPTN), MAT (F2), ▷ (F6), ▷ (F6), CrsP (F3)
+>>> CrossP(<Matrix|Vector>,<Matrix|Vector>)
+Effectue le produit vectoriel des 2 vecteurs - ou matrices unidimensionnelles - (__à 2 et 3 composantes seulement__), et renvoie toujours un vecteur à 3 composantes.
+Les vecteurs 2D (`[[X,Y]]`) auront une composante Z nulle (ils sont interprétés comme `[[X,Y,0]]`).
+Par exemple, `CrossP([[1,2]],[[3,4]])` donnera `[0,0,-2]`.
+
+Une **Erreur dimension** est renvoyée si les arguments n'ont pas le même nombre d'éléments, si un des 2 n'est pas unidimensionnel, ou si leur nombre d'éléments n'est pas de 2 ou 3.
+En effet, on peut multiplier un vecteur colonne par un vecteur ligne sans souci !
+
+<Matrix|Vector> peut être de différentes formes :
+[list=arrow]
+  [li]`[[1,2,3]]`[/li]
+  [li]`Vct A`[/li]
+  [li]`Mat A`, à condition que ce soit une matrice unidimensionnelle.[/li]
+  [li]`2×Vct A`, ou toute autre expression/fonction renvoyant une matrice unidimensionnelle (= vecteur).[/li]
+[/list]
+||| Mat; Vct; DotP; Angle; Norm; UnitV;
+
+
+$$$ Angle
+@@@ OPTN (OPTN), MAT (F2), ▷ (F6), ▷ (F6), Angle (F4)
+>>> Angle(<Matrix|Vector>,<Matrix|Vector>)
+Calcule l'angle entre 2 vecteurs (ou matrices unidimensionnelles), et renvoie toujours un angle positif entre 0 et 180° inclus.
+
+L'angle retourné dépend de l'unité d'angle que vous utilisez (voir &&Deg&&, &&Rad&&, &&Gra&& pour changer d'unité).
+
+Une **Erreur dimension** est renvoyée si les arguments n'ont pas le même nombre d'éléments (ou si un des 2 n'est pas unidimensionnel).
+On peut donner un vecteur colonne et un vecteur ligne sans souci !
+
+<Matrix|Vector> peut être de différentes formes :
+[list=arrow]
+  [li]`[[1,2,3]]`[/li]
+  [li]`Vct A`[/li]
+  [li]`Mat A`, à condition que ce soit une matrice unidimensionnelle.[/li]
+  [li]`2×Vct A`, ou toute autre expression/fonction renvoyant une matrice unidimensionnelle (= vecteur).[/li]
+[/list]
+||| Mat; Vct; DotP; CrossP; Norm; UnitV;
+
+
+$$$ UnitV
+@@@ OPTN (OPTN), MAT (F2), ▷ (F6), ▷ (F6), UntV (F5)
+>>> UnitV(<Matrix|Vector>)
+Renvoie le vecteur unitaire, en divisant le vecteur donné (ou matrice unidimensionnelle) par sa norme euclidienne (voir &&Norm&&).
+
+<Matrix|Vector> peut être de différentes formes :
+[list=arrow]
+  [li]`[[1,2,3]]`[/li]
+  [li]`Vct A`[/li]
+  [li]`Mat A`, à condition que ce soit une matrice unidimensionnelle.[/li]
+  [li]`2×Vct A`, ou toute autre expression/fonction renvoyant un vecteur (=matrice unidimensionnelle).[/li]
+[/list]
+||| Mat; Vct; DotP; CrossP; Angle; Norm;
+
+
+$$$ Norm
+@@@ OPTN (OPTN), MAT (F2), ▷ (F6), ▷ (F6), ▷ (F6), Norm (F1)
+>>> Norm(<Matrix|Vector>)
+Renvoie la norme euclidienne du vecteur donné (ou matrice), qui est bien là racine carrée de la somme de tous les éléments.
+
+<Matrix|Vector> peut être de différentes formes :
+[list=arrow]
+  [li]`[[1,2,3]]`[/li]
+  [li]`Vct A`[/li]
+  [li]`Mat A`[/li]
+  [li]`2×Vct A`, ou toute autre expression/fonction renvoyant une matrice.[/li]
+[/list]
+||| Mat; Vct; DotP; CrossP; Angle; UnitV;
